@@ -7,15 +7,22 @@ import './styles/styles.scss';
 import { Spinner } from '../shared';
 import RoutesWrapper from './routes/RoutesWrapper';
 import { theme } from '../shared/config/theme';
+import { ApolloProvider } from '@apollo/client';
+import client from '../shared/graphQL/apolloClient';
+import { AuthProvider } from './providers/AuthProvider';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Suspense fallback={<Spinner />}>
-          <RoutesWrapper />
-        </Suspense>
-      </Router>
+      <ApolloProvider client={client}>
+        <AuthProvider>
+          <Router>
+            <Suspense fallback={<Spinner />}>
+              <RoutesWrapper />
+            </Suspense>
+          </Router>
+        </AuthProvider>
+      </ApolloProvider>
     </ThemeProvider>
   )
 }

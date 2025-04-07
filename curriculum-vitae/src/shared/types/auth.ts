@@ -1,8 +1,8 @@
-export interface AuthFormProps {
-  type: 'login' | 'signup' | 'forgot-password',
-};
+export interface AuthContextType {
+  isAuth: boolean;
+  setIsAuth: (value: boolean) => void;
+}
 
-export interface AuthData {
-  email: string,
-  password: string,
+export interface AuthFormProps {
+  type: "login" | "signup" | "forgotPassword";
 }

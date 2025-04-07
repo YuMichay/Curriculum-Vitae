@@ -11,8 +11,7 @@ const ForgotPasswordPage = React.lazy(() => import('../../pages/auth/forgot-pass
 const RoutesWrapper: React.FC = () => {
   return (
     <Routes>
-      <Route path='/' element={<PrivateRoute />}>
-      </Route>
+      <Route path='/' element={<PrivateRoute />}></Route>
       <Route path='/auth' element={<RouteLayout isAuthPage={true} />}>
         <Route path='signup' element={<RegisterPage />} />
         <Route path='login' element={<LoginPage />} />
