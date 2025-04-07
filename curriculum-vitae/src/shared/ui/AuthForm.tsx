@@ -11,10 +11,12 @@ import { AuthFormProps } from "../types/auth";
 import { schema } from "../config/schema";
 
 import { useSignup } from "../hooks/useSignup";
+import { useLogin } from "../hooks/useLogin";
 
 const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { signup, loading: loadingSignup, error: errorSignup } = useSignup();
+  const { login, loading: loadingLogin, error: errorLogin } = useLogin();
   const defaultFormValues = type === "signup" || type === "login" ? {
     email: "",
     password: "",
@@ -38,6 +40,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const onSubmit = (data: AuthInput) => {
     if (type === "signup") {
       signup(data);
+    } else if (type === "login") {
+      login(data);
     }
   };
   
@@ -105,6 +109,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
               {errorSignup.message}
             </Box>
           )}
+          {errorLogin && (
+            <Box sx={{ color: "red", textAlign: "center" }}>
+              {errorLogin.message}
+            </Box>
+          )}
         </div>
 
         <div className="form-buttons">
@@ -114,7 +123,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             color="secondary"
             sx={{ minWidth: "200px", marginTop: 2 }}
           >
-            {loadingSignup ? "Loading" : type === "signup" ? "Create Account" : type === "login" ? "Log in" : "Reset Password"}
+            {loadingSignup || loadingLogin ? "Loading" : type === "signup" ? "Create Account" : type === "login" ? "Log in" : "Reset Password"}
           </Button>
 
           <ListItem component={Link} to={type !== "login" ? "/auth/login" : "/auth/forgot-password"}>
