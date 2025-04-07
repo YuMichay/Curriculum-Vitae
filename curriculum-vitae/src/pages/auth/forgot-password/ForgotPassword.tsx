@@ -1,7 +1,9 @@
+import { AuthForm } from "../../../shared";
+
 const ForgotPassword: React.FC = () => {
   return (
     <div className="forgot-password-page">
-      Forgot Password Page
+      <AuthForm type="forgot-password" />
     </div>
   )
 }

@@ -28,10 +28,10 @@ const Header: React.FC = () => {
   return (
     <header>
       <div className={`signup-button${isActive ? " active-button" : ""}`}>
-        <Button variant="text" color={isActive ? "secondary" : "primary"} onClick={() => handleClick("signup")}>Sign Up</Button>
+        <Button variant="text" color={isActive ? "secondary" : "primary"} onClick={() => handleClick("signup")} fullWidth>Sign Up</Button>
       </div>
       <div className={`login-button${!isActive ? " active-button" : ""}`}>
-        <Button variant="text" color={!isActive ? "secondary" : "primary"} onClick={() => handleClick("login")}>Log In</Button>
+        <Button variant="text" color={!isActive ? "secondary" : "primary"} onClick={() => handleClick("login")} fullWidth>Log In</Button>
       </div>
     </header>
   );

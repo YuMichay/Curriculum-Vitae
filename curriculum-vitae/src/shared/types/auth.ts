@@ -1,5 +1,5 @@
 export interface AuthFormProps {
-  type: 'login' | 'signup',
+  type: 'login' | 'signup' | 'forgot-password',
 };
 
 export interface AuthData {

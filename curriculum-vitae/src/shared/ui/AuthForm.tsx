@@ -15,6 +15,12 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const defaultFormValues = type === "signup" || type === "login" ? {
+    email: "",
+    password: "",
+  } : {
+    password: "",
+  };
 
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -26,10 +32,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: defaultFormValues,
   });
 
   const onSubmit = async(data: AuthData) => {
@@ -37,32 +40,53 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     setError(null);
 
     navigate("/");
+
+    console.log(data)
+
+    try {
+      // const response = await loginUser({email: data.email, password: data.password});
+      
+      // if (response.data) {
+      //   localStorage.setItem("id", JSON.stringify(response.data.id));
+      //   localStorage.setItem("username", JSON.stringify(response.data.username));
+      //   localStorage.setItem("role", JSON.stringify(response.data.role));
+      //   setIsAuth(true);
+      //   navigate("/");
+      // }
+    } catch (err: unknown) {
+      setError("Registration failed");
+      console.error("Registration error", err);
+    } finally {
+      setLoading(false);
+    }
   };
   
   return (
     <Box sx={{ maxWidth: 600, margin: "auto", padding: 3 }}>
       <div className="form-header">
-        <Typography variant="h4">{type === "signup" ? "Register Now" : "Welcome Back"}</Typography>
-        <Typography variant="h6">{type === "signup" ? "Welcome! Sign up to continue" : "Hello again! Log in to continue"}</Typography>
+        <Typography variant="h4">{type === "signup" ? "Register Now" : type === "login" ? "Welcome Back" : type === "forgot-password" ? "Forgot Password" : "Reset Password"}</Typography>
+        <Typography variant="h6">{type === "signup" ? "Welcome! Sign up to continue" : type === "login" ? "Hello again! Log in to continue" : "We will send you an email with further instructions"}</Typography>
       </div>
       
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-inputs">
-          <div className="form-email">
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Email"
-                  fullWidth
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              )}
-            />
-          </div>
+        <div className="form-email">
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Email"
+                fullWidth
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+            )}
+          />
+        </div>
+
+        {(type === "signup" || type === "login") && (
           <div className="form-password">
             <Controller
               name="password"
@@ -92,6 +116,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
               )}
             />
           </div>
+        )}
         </div>
 
         <div className="form-error">
@@ -109,11 +134,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             color="secondary"
             sx={{ minWidth: "200px", marginTop: 2 }}
           >
-            {loading ? "Loading" : type === "signup" ? "Create Account" : "Log in"}
+            {loading ? "Loading" : type === "signup" ? "Create Account" : type === "login" ? "Log in" : "Reset Password"}
           </Button>
 
-          <ListItem component={Link} to={type === "signup" ? "/auth/login" : "/auth/forgot-password"}>
-            <ListItemText>{type === "signup" ? "I have an account" : "Forgot Password"}</ListItemText>
+          <ListItem component={Link} to={type === "signup" || type === "forgot-password" ? "/auth/login" : "/auth/forgot-password"}>
+            <ListItemText>{type === "signup" ? "I have an account" : type === "login" ? "Forgot Password" : "Cancel"}</ListItemText>
           </ListItem>
         </div>
       </form>
