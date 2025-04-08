@@ -11,7 +11,7 @@ const httpLink = new HttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = Cookies.get('access_token');
+  const token = new URLSearchParams(window.location.search).get('token') || Cookies.get('access_token');
 
   return {
     headers: {
