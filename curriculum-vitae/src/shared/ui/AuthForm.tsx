@@ -8,21 +8,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import { AuthFormProps } from "../types/auth";
-import { schema } from "../config/schema";
-
 import { useSignup } from "../hooks/useSignup";
 import { useLogin } from "../hooks/useLogin";
+import { authSchema } from "../config/schemas/authSchema";
 
 const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { signup, loading: loadingSignup, error: errorSignup } = useSignup();
   const { login, loading: loadingLogin, error: errorLogin } = useLogin();
-  const defaultFormValues = type === "signup" || type === "login" ? {
-    email: "",
-    password: "",
-  } : {
-    password: "",
-  };
 
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -33,8 +26,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: defaultFormValues,
+    resolver: yupResolver(authSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    }
   });
 
   const onSubmit = (data: AuthInput) => {
@@ -48,29 +44,27 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   return (
     <Box sx={{ maxWidth: 600, margin: "auto", padding: 3 }}>
       <div className="form-header">
-        <Typography variant="h4">{type === "signup" ? "Register Now" : type === "login" ? "Welcome Back" : "Forgot Password"}</Typography>
-        <Typography variant="h6">{type === "signup" ? "Welcome! Sign up to continue" : type === "login" ? "Hello again! Log in to continue" : "We will send you an email with further instructions"}</Typography>
+        <Typography variant="h4">{type === "signup" ? "Register Now" : "Welcome Back"}</Typography>
+        <Typography variant="h6">{type === "signup" ? "Welcome! Sign up to continue" : "Hello again! Log in to continue"}</Typography>
       </div>
       
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-inputs">
-        <div className="form-email">
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Email"
-                fullWidth
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-            )}
-          />
-        </div>
-
-        {(type === "signup" || type === "login") && (
+          <div className="form-email">
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Email"
+                  fullWidth
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                />
+              )}
+            />
+          </div>
           <div className="form-password">
             <Controller
               name="password"
@@ -100,7 +94,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
               )}
             />
           </div>
-        )}
         </div>
 
         <div className="form-error">
@@ -123,11 +116,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             color="secondary"
             sx={{ minWidth: "200px", marginTop: 2 }}
           >
-            {loadingSignup || loadingLogin ? "Loading" : type === "signup" ? "Create Account" : type === "login" ? "Log in" : "Reset Password"}
+            {loadingSignup || loadingLogin ? "Loading" : type === "signup" ? "Create Account" : "Log in"}
           </Button>
 
           <ListItem component={Link} to={type !== "login" ? "/auth/login" : "/auth/forgot-password"}>
-            <ListItemText>{type === "signup" ? "I have an account" : type === "login" ? "Forgot Password" : "Cancel"}</ListItemText>
+            <ListItemText>{type === "signup" ? "I have an account" : "Forgot Password"}</ListItemText>
           </ListItem>
         </div>
       </form>

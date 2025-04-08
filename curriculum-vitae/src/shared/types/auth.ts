@@ -4,5 +4,5 @@ export interface AuthContextType {
 }
 
 export interface AuthFormProps {
-  type: "login" | "signup" | "forgotPassword";
+  type: "login" | "signup";
 }

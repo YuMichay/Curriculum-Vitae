@@ -1,19 +1,22 @@
 import { ApolloClient, InMemoryCache, HttpLink, from } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
+import Cookies from 'js-cookie';
+
 import { BASE_URL } from '../constants/baseUrl';
 
 const httpLink = new HttpLink({
   uri: BASE_URL,
+  credentials: 'same-origin'
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('access_token');
+  const token = Cookies.get('access_token');
 
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      Authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
