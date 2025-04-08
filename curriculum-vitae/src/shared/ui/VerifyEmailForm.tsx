@@ -7,7 +7,7 @@ import { verifyEmailSchema } from "../config/schemas/verifySchema";
 import { VerifyMailInput } from "cv-graphql";
 
 const VerifyEmailForm: React.FC = () => {
-  const { verifyMail, loading: loadingVerify, error: errorVerify } = useVerification();
+  const { verifyMail, loading, error } = useVerification();
 
   const {
     control,
@@ -58,9 +58,9 @@ const VerifyEmailForm: React.FC = () => {
         </div>
 
         <div className="form-error">
-          {errorVerify && (
+          {error && (
             <Box sx={{ color: "red", textAlign: "center" }}>
-              {errorVerify.message}
+              {error.message}
             </Box>
           )}
         </div>
@@ -72,7 +72,7 @@ const VerifyEmailForm: React.FC = () => {
             color="secondary"
             sx={{ minWidth: "200px", marginTop: 2 }}
           >
-            {loadingVerify ? "Loading" : "Confirm"}
+            {loading ? "Loading" : "Confirm"}
           </Button>
         </div>
       </form>

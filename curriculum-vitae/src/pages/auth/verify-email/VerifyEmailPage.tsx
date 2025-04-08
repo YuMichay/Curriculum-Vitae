@@ -1,4 +1,4 @@
-import VerifyEmailForm from "../../../shared/ui/VerifyEmailForm";
+import { VerifyEmailForm } from "../../../shared";
 
 const VerifyEmail: React.FC = () => {
   return (
