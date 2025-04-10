@@ -7,6 +7,8 @@ import RouteLayout from './RouteLayout.tsx';
 const RegisterPage = React.lazy(() => import('../../pages/auth/signup/SignupPage.tsx'));
 const LoginPage = React.lazy(() => import('../../pages/auth/login/LoginPage.tsx'));
 const ForgotPasswordPage = React.lazy(() => import('../../pages/auth/forgot-password/ForgotPasswordPage.tsx'));
+const ResetPasswordPage = React.lazy(() => import("../../pages/auth/reset-password/ResetPasswordPage"));
+const VerifyEmailPage = React.lazy(() => import("../../pages/auth/verify-email/VerifyEmailPage"));
 
 const RoutesWrapper: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const RoutesWrapper: React.FC = () => {
         <Route index element={<Navigate to='signup' />} />
       </Route>
       <Route path='/auth/forgot-password' element={<ForgotPasswordPage />} />
+      <Route path="/verify-email" element={<VerifyEmailPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path='*' element={<Navigate to='/auth' />} />
     </Routes>
   )
