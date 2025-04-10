@@ -1,7 +1,7 @@
 import { useState, ReactNode, useEffect } from "react";
 
-import { AuthContext } from "../../shared/hooks/useAuth";
-import { checkAuth } from "../../shared/lib/checkAuth";
+import { AuthContext } from "../../shared/hooks/useAuth.tsx";
+import { checkAuth } from "../../shared/lib/checkAuth.ts";
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);

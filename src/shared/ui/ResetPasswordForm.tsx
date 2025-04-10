@@ -7,8 +7,8 @@ import { Box, Button, IconButton, InputAdornment, ListItem, ListItemText, TextFi
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-import { resetPasswordSchema } from "../config/schemas/resetPasswordSchema";
-import { useResetPassword } from "../hooks/useResetPassword";
+import { resetPasswordSchema } from "../config/schemas/resetPasswordSchema.ts";
+import { useResetPassword } from "../hooks/useResetPassword.tsx";
 
 const ResetPasswordForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,14 +32,14 @@ const ResetPasswordForm: React.FC = () => {
   const onSubmit = (data: ResetPasswordInput) => {
     resetPassword(data);
   };
-  
+
   return (
     <Box sx={{ maxWidth: 600, margin: "auto", padding: 3 }}>
       <div className="form-header">
         <Typography variant="h4">Reset Password</Typography>
         <Typography variant="h6">We will send you an email with further instructions</Typography>
       </div>
-      
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-inputs">
           <div className="form-password">

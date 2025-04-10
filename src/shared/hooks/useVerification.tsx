@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { VerifyMailInput } from "cv-graphql";
 import { useNavigate } from "react-router-dom";
 
-import { VERIFY_MAIL } from "../graphQL/auth/verifyMail";
+import { VERIFY_MAIL } from "../graphQL/auth/verifyMail.ts";
 
 export const useVerification = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export const useVerification = () => {
       if (response.errors) {
         throw new Error("Verification failed");
       }
-  
+
       navigate('/auth/login');
     } catch (err) {
       console.error("Verification failed: ", err);

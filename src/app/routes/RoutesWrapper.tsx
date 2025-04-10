@@ -1,12 +1,12 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import PrivateRoute from './PrivateRoute';
-import RouteLayout from './RouteLayout';
+import PrivateRoute from './PrivateRoute.tsx';
+import RouteLayout from './RouteLayout.tsx';
 
-const RegisterPage = React.lazy(() => import('../../pages/auth/signup/SignupPage'));
-const LoginPage = React.lazy(() => import('../../pages/auth/login/LoginPage'));
-const ForgotPasswordPage = React.lazy(() => import('../../pages/auth/forgot-password/ForgotPassword'));
+const RegisterPage = React.lazy(() => import('../../pages/auth/signup/SignupPage.tsx'));
+const LoginPage = React.lazy(() => import('../../pages/auth/login/LoginPage.tsx'));
+const ForgotPasswordPage = React.lazy(() => import('../../pages/auth/forgot-password/ForgotPasswordPage.tsx'));
 
 const RoutesWrapper: React.FC = () => {
   return (

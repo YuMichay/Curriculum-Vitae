@@ -4,8 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ForgotPasswordInput } from "cv-graphql";
 import { Box, Button, ListItem, ListItemText, TextField, Typography } from "@mui/material";
 
-import { useForgotPassword } from "../hooks/useForgotPassword";
-import { forgotPasswordSchema } from "../config/schemas/forgotPasswordSchema";
+import { useForgotPassword } from "../hooks/useForgotPassword.tsx";
+import { forgotPasswordSchema } from "../config/schemas/forgotPasswordSchema.ts";
 
 const ForgotPasswordForm: React.FC = () => {
   const { forgotPassword, loading, error } = useForgotPassword();
@@ -24,14 +24,14 @@ const ForgotPasswordForm: React.FC = () => {
   const onSubmit = (data: ForgotPasswordInput) => {
     forgotPassword(data);
   };
-  
+
   return (
     <Box sx={{ maxWidth: 600, margin: "auto", padding: 3 }}>
       <div className="form-header">
         <Typography variant="h4">Forgot Password</Typography>
         <Typography variant="h6">We will send you an email with further instructions</Typography>
       </div>
-      
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-inputs">
           <div className="form-email">

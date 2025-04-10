@@ -2,7 +2,7 @@ import { ResetPasswordInput } from "cv-graphql";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 
-import { RESET_PASSWORD } from "../graphQL/auth/resetPasswordQuery";
+import { RESET_PASSWORD } from "../graphQL/auth/resetPasswordQuery.ts";
 
 export const useResetPassword = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export const useResetPassword = () => {
   const resetPassword = async (auth: ResetPasswordInput) => {
     try {
       const response = await resetPasswordQuery({ variables: { auth } });
-  
+
       if (response.errors) {
         throw new Error("Reset password failed");
       }

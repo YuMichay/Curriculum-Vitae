@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
-import RouteLayout from "./RouteLayout";
-import { checkAuth } from "../../shared/lib/checkAuth";
+import RouteLayout from "./RouteLayout.tsx";
+import { checkAuth } from "../../shared/lib/checkAuth.ts";
 
 const PrivateRoute: React.FC = () => {
   const isAuth = checkAuth();

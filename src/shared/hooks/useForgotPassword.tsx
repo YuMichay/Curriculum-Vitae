@@ -2,7 +2,7 @@ import { ForgotPasswordInput } from "cv-graphql";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 
-import { FORGOT_PASSWORD } from "../graphQL/auth/forgotPasswordQuery";
+import { FORGOT_PASSWORD } from "../graphQL/auth/forgotPasswordQuery.ts";
 
 export const useForgotPassword = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export const useForgotPassword = () => {
   const forgotPassword = async (auth: ForgotPasswordInput) => {
     try {
       const response = await forgotPasswordQuery({ variables: { auth } });
-  
+
       if (response.errors) {
         throw new Error("Reset password failed");
       }

@@ -7,10 +7,10 @@ import { Box, Button, IconButton, InputAdornment, ListItem, ListItemText, TextFi
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-import { AuthFormProps } from "../types/auth";
-import { useSignup } from "../hooks/useSignup";
-import { useLogin } from "../hooks/useLogin";
-import { authSchema } from "../config/schemas/authSchema";
+import { AuthFormProps } from "../types/auth.ts";
+import { useSignup } from "../hooks/useSignup.tsx";
+import { useLogin } from "../hooks/useLogin.tsx";
+import { authSchema } from "../config/schemas/authSchema.ts";
 
 const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,14 +40,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       login(data);
     }
   };
-  
+
   return (
     <Box sx={{ maxWidth: 600, margin: "auto", padding: 3 }}>
       <div className="form-header">
         <Typography variant="h4">{type === "signup" ? "Register Now" : "Welcome Back"}</Typography>
         <Typography variant="h6">{type === "signup" ? "Welcome! Sign up to continue" : "Hello again! Log in to continue"}</Typography>
       </div>
-      
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-inputs">
           <div className="form-email">

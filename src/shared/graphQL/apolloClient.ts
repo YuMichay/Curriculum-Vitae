@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import Cookies from 'js-cookie';
 
-import { BASE_URL } from '../constants/baseUrl';
+import { BASE_URL } from '../constants/baseUrl.ts';
 
 const httpLink = new HttpLink({
   uri: BASE_URL,

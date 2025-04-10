@@ -5,11 +5,11 @@ import { ThemeProvider } from '@mui/material';
 import './styles/styles.scss';
 
 import { Spinner } from '../shared';
-import RoutesWrapper from './routes/RoutesWrapper';
-import { theme } from '../shared/config/theme';
+import RoutesWrapper from './routes/RoutesWrapper.tsx';
+import { theme } from '../shared/config/theme.tsx';
 import { ApolloProvider } from '@apollo/client';
-import client from '../shared/graphQL/apolloClient';
-import { AuthProvider } from './providers/AuthProvider';
+import client from '../shared/graphQL/apolloClient.ts';
+import { AuthProvider } from './providers/AuthProvider.tsx';
 
 const App: React.FC = () => {
   return (

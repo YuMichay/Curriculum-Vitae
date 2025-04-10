@@ -4,7 +4,7 @@ import { AuthInput } from "cv-graphql";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import { SIGNUP } from "../graphQL/auth/signupQuery";
+import { SIGNUP } from "../graphQL/auth/signupQuery.ts";
 
 export const useSignup = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export const useSignup = () => {
 
       const accessToken = response?.data?.signup?.access_token;
       const user = response?.data?.signup?.user;
-  
+
       if (!accessToken || !user) {
         throw new Error("Signup failed: no access token or user");
       }

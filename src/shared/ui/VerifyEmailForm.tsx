@@ -2,8 +2,8 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, TextField, Typography } from "@mui/material";
 
-import { useVerification } from "../hooks/useVerification";
-import { verifyEmailSchema } from "../config/schemas/verifySchema";
+import { useVerification } from "../hooks/useVerification.tsx";
+import { verifyEmailSchema } from "../config/schemas/verifySchema.ts";
 import { VerifyMailInput } from "cv-graphql";
 
 const VerifyEmailForm: React.FC = () => {
@@ -20,14 +20,14 @@ const VerifyEmailForm: React.FC = () => {
   const onSubmit = (data: VerifyMailInput) => {
     verifyMail(data);
   };
-  
+
   return (
     <Box sx={{ maxWidth: 600, margin: "auto", padding: 3 }}>
       <div className="form-header">
         <Typography variant="h4">Welcome Back</Typography>
         <Typography variant="h6">Hello again! Enter your verification code to continue</Typography>
       </div>
-      
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-inputs">
             <div className="form-verification-code">
