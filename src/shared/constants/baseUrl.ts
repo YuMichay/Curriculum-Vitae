@@ -1,0 +1,1 @@
+export const BASE_URL = "https://cv-project-js.inno.ws/api/graphql";
